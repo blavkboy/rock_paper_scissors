@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rock Paper Scissors</title>
+    </head>
+    <body>
+        <script>
+            let user_input = prompt("Rock, Paper or Scissor?");
+            let signs = ['rock', 'paper', 'scissor'];
+            function precedence(user_sign, computer_in)
+            {
+                user_sign = user_sign.toLowerCase();
+                switch (user_sign)
+                {
+                    case "rock":
+                        if (computer_in === 'paper')
+                            console.log("You lose. Paper beats rock!");
+                        else if (computer_in === 'rock')
+                            console.log("Draw...");
+                        else
+                            console.log("You win, rock beats scissor.");
+                        break;
+                    case "paper":
+                        if (computer_in === 'scissor')
+                            console.log("You lose. Scissor cuts paper.");
+                        else if (computer_in === 'paper')
+                            console.log("Draw...");
+                        else
+                            console.log("You win, paper beats rock.");
+                        break;
+                    case "scissor":
+                        if (computer_in === 'rock')
+                            console.log("You lose. Rock crushes paper!");
+                        else if (computer_in === 'scissor')
+                            console.log("Draw...");
+                        else
+                            console.log("You win!!! Scissor cuts paper!!!");
+                    default:
+                        console.log("You lose automatically, invalid selection!");
+                }
+            }
+            function computer_choice()
+            {
+                let choice = Math.floor(Math.random() * 3);
+                return choice;
+            }
+            let again;
+            do {
+                precedence(user_input, signs[computer_choice()]);
+                again = prompt("Enter [1] to play again, anything else to quit");
+                again = Number(Math.floor(again));
+                if (again === 1)
+                  user_input = prompt("Rock, paper or scissors?");
+                else
+                    break;
+            } while (1);
+        </script>
+    </body>
+</html>
