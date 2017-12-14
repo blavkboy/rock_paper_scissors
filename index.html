@@ -60,12 +60,13 @@
                 let choice = Math.floor(Math.random() * 3);
                 return choice;
             }
-            let again = 0;
+            let again = 0, comp_score = 0, comp_play;
             do {
                 user_input = prompt("Rock, Paper or Scissor?");
-                score = precedence(score, user_input, signs[computer_choice()]);
+		comp_play = signs[computer_choice()];
+                (precedence(score, user_input, comp_play)) ? score++ : comp_score++;
                 again++;
-                console.log(`User score: ${score}`);
+		    console.log(`User score: ${score}\nComputer score: ${comp_score}`);
             } while (again < 5);
             game(score);
         </script>
