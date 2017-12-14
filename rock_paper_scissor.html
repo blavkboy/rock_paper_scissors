@@ -7,6 +7,7 @@
         <script>
             let user_input = prompt("Rock, Paper or Scissor?");
             let signs = ['rock', 'paper', 'scissor'];
+            let comp_score = 0;
             function precedence(user_sign, computer_in)
             {
                 user_sign = user_sign.toLowerCase();
@@ -14,46 +15,70 @@
                 {
                     case "rock":
                         if (computer_in === 'paper')
-                            console.log("You lose. Paper beats rock!");
+                            {
+                                console.log("You lose. Paper beats rock!");
+                                comp_score += 1;
+                            }
                         else if (computer_in === 'rock')
                             console.log("Draw...");
                         else
-                            console.log("You win, rock beats scissor.");
+                            {
+                                console.log("You win, rock beats scissor.");
+                                return 1;
+                            }
                         break;
                     case "paper":
                         if (computer_in === 'scissor')
-                            console.log("You lose. Scissor cuts paper.");
+                            {
+                                console.log("You lose. Scissor cuts paper.");
+                                comp_score += 1;
+                            }
                         else if (computer_in === 'paper')
                             console.log("Draw...");
                         else
-                            console.log("You win, paper beats rock.");
+                            {
+                                console.log("You win, paper beats rock.");
+                                return 1;
+                            }
                         break;
                     case "scissor":
                         if (computer_in === 'rock')
-                            console.log("You lose. Rock crushes paper!");
+                            {
+                                console.log("You lose. Rock crushes paper!");
+                                comp_score += 1;
+                            }
                         else if (computer_in === 'scissor')
                             console.log("Draw...");
                         else
-                            console.log("You win!!! Scissor cuts paper!!!");
+                            {
+                                console.log("You win!!! Scissor cuts paper!!!");
+                                return 1;
+                            }
                     default:
-                        console.log("You lose automatically, invalid selection!");
+                        console.log("You both lose, invalid selection!");
                 }
+                return 0;
             }
             function computer_choice()
             {
                 let choice = Math.floor(Math.random() * 3);
                 return choice;
             }
-            let again;
-            do {
-                precedence(user_input, signs[computer_choice()]);
-                again = prompt("Enter [1] to play again, anything else to quit");
-                again = Number(Math.floor(again));
-                if (again === 1)
-                  user_input = prompt("Rock, paper or scissors?");
+
+            function game(score)
+            {
+                let times = 0;
+                while(times < 5)
+                {
+                    score += precedence(user_input, signs[computer_choice()]);
+                    console.log(`Player: ${score}\nComputer: ${comp_score}`);
+                    times++;
+                }
+                if(score > 2)
+                    console.lg("You win!");
                 else
-                    break;
-            } while (1);
+                    console.log("You lose!");
+            }
         </script>
     </body>
 </html>
