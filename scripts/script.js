@@ -1,7 +1,9 @@
 const gameOptions = ['rock', 'paper', 'scissors'];
 const playerScore = document.querySelector('#player_points');
 const computerScore = document.querySelector('#computer_points');
-let user = '', scores = [0, 0];
+let user = '', scores = [0, 0], itr = 0, done = 0;
+const computerCenter = document.querySelector('#computer').querySelector('center');
+const removePcImage = function(){ computerCenter.removeChild(computerCenter.childNodes[3]); }
 playerScore.textContent += ' 0';
 computerScore.textContent += ' 0';
 
@@ -24,13 +26,14 @@ const decideWinner = function(pc, user){
             else
                 return 0;
             break;
-        case 'scissor':
+        case 'scissors':
             if(pc === 'scissors')
                 return 'draw';
             else if(pc === 'rock')
                 return 1;
             else
                 return 0;
+            break;
     }
 }
 
@@ -46,11 +49,15 @@ const gamePlay = function(user){
     pc = computerChoice(gameOptions);
     //console.log('PC: ' + pc);
     winner = decideWinner(pc, user);
+    if(winner !== 'draw')
+        pcImage(pc);
     //alert(winner);
     //console.log(winner);
+    if(itr != 0 && winner !== 'draw')
+        removePcImage();
     if(winner !== 'draw')
     {
-        console.log('find answer');
+        itr++;
         scores[winner]++;
         if(winner === 0)
         {
@@ -77,11 +84,47 @@ const userChoice = function(){
             // 'i.target.alt' returns a string with
             // our choice between rock, paper, scissors.
             user = i.target.alt;
-            gamePlay(user);
+            if(itr < 5)
+                gamePlay(user);
+            else
+                announceWinner();
             //return user;
         }
     }
 }
 
-//gamePlay(user);
+const restartGame = function(){
+    let button = document.querySelector('button');
+    button.onclick = function(){
+        itr = 0;
+        playerScore.textContent = 'Player: 0';
+        computerScore.textContent = 'Computer: 0';
+        scores[0] = 0;
+        scores[1] = 0;
+        done = 0;
+        if(computerCenter.childNodes.length === 4)
+            removePcImage();
+    }
+}
+
+const pcImage = function(pc)
+{
+    let image = document.createElement('img');
+    image.alt = pc;
+    image.src = `images/${pc}.jpg`;
+    computerCenter.appendChild(image);
+}
+
+const announceWinner = function(){
+    if(itr === 5 && done === 0)
+    {
+        if(scores[0] > scores[1])
+            playerScore.textContent += ' Winner';
+        else
+            computerScore.textContent += ' Winner';
+        done++;
+    }
+}
+
+restartGame();
 userChoice();
