@@ -1,74 +1,47 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
         <title>Rock Paper Scissors</title>
+        <link rel="stylesheet" href="styles/styles.css">
     </head>
     <body>
-        <script>
-            let user_input;
-            let signs = ['rock', 'paper', 'scissor'];
-            let score = 0;
-            function precedence(score, user_sign, computer_in, user_score)
-            {
-                user_sign = user_sign.toLowerCase();
-                switch (user_sign)
-                {
-                    case "rock":
-                        if (computer_in === 'paper')
-                            console.log("You lose. Paper beats rock!");
-                        else if (computer_in === 'rock')
-                            console.log("Draw...");
-                        else {
-                            score++;
-                            console.log("You win, rock beats scissor.");
-                            }
-                        break;
-                    case "paper":
-                        if (computer_in === 'scissor')
-                            console.log("You lose. Scissor cuts paper.");
-                        else if (computer_in === 'paper')
-                            console.log("Draw...");
-                        else {
-                            score = 1;
-                            console.log("You win, paper beats rock.");
-                            }
-                        break;
-                    case "scissor":
-                        if (computer_in === 'rock')
-                            console.log("You lose. Rock crushes paper!");
-                        else if (computer_in === 'scissor')
-                            console.log("Draw...");
-                        else {
-                            score = 1;
-                            console.log("You win!!! Scissor cuts paper!!!");
-                            }
-                        break;
-                    default:
-                        console.log("You lose automatically, invalid selection!");
-                }
-                return score;
-            }
-            function game(user_score)
-            {
-                if(score > 2)
-                    console.log("You win!");
-                else
-                    console.log("Sorry, you lose!");
-            }
-            function computer_choice()
-            {
-                let choice = Math.floor(Math.random() * 3);
-                return choice;
-            }
-            let again = 0, comp_score = 0, comp_play;
-            do {
-                user_input = prompt("Rock, Paper or Scissor?");
-		comp_play = signs[computer_choice()];
-                (precedence(score, user_input, comp_play)) ? score++ : comp_score++;
-                again++;
-		    console.log(`User score: ${score}\nComputer score: ${comp_score}`);
-            } while (again < 5);
-            game(score);
-        </script>
+        <center>
+            <h1>Rock Paper Scissors</h1>
+        </center>
+        <div id="container">
+            <center>
+                <div id="score">
+                    <h2 style="top: 20px">Score</h2>
+                </div>
+                <p id="player_points">Player:</p>
+                <p id="computer_points">Computer:</p>
+            </center>
+            <div id="player" class="game_box">
+                <center>
+                <h3>Player</h3>
+                </center>
+                <a href="#/" id="rock_img">
+                    <img src="images/rock.jpg" alt="rock" class="image" style="position: relative; right: -20px">
+                </a>
+                <a href="#/" id="paper_img">
+                    <img src="images/paper.jpg" alt="paper" class="image" style="position: relative; right: -110px">
+                </a>
+                <center>
+                    <a href="#/" id="scissor_img">
+                        <img src="images/scissors.jpg" alt="scissors" class="image">
+                    </a>
+                </center>
+            </div>
+            <div id="computer" class="game_box">
+                <center>
+                    <h3>Computer</h3>
+                </center>
+            </div>
+            <center>
+                <button type="button">Restart Game</button>
+            </center>
+        </div>
+        <script type="text/javascript" src="scripts/script.js"></script>
     </body>
 </html>

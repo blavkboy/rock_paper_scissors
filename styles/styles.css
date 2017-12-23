@@ -1,0 +1,35 @@
+body {
+    background-color: rgb(211, 255, 240);
+}
+
+.image{
+    width:  130px;
+    height: 130px;
+}
+
+.game_box{
+    width:  400px;
+    height: 400px;
+}
+
+#player{
+    z-index: 1;
+    position:   absolute;
+    right:      50px;
+    border:     dotted gold;
+}
+
+#computer{
+    position: absolute;
+    left: 50px;
+    border: dotted crimson;
+}
+
+#score {
+    border: solid rgb(226, 141, 212);
+    height: 50px;
+}
+
+#container{
+    width: 100%;
+}
